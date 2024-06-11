@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, signOut } from 'firebase/auth'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
+    userLoggedIn: false,
     user: null,
     error: null,
     loading: false
@@ -11,8 +12,9 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async register(email, password) {
       try {
-        const { userCredential } = await createUserWithEmailAndPassword(auth, email, password)
-        this.user = userCredential.user
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+        this.user = userCredential
+        this.userLoggedIn = true
       } catch (error) {
         const errorCode = error.code
         const errorMessage = error.message
@@ -27,6 +29,7 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       await signOut()
       this.user = null
+      this.userLoggedIn = false
     }
   }
 })

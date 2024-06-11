@@ -1,17 +1,17 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterView } from 'vue-router'
-import useUserStore from '@/stores/user'
+import { useAuthStore } from '@/stores/auth'
 import AppBar from '@/components/AppBar.vue'
 import NavDrawer from '@/components/NavDrawer.vue'
 import Vue3Toastify from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 import '@vuepic/vue-datepicker/dist/main.css'
 
-const userStore = useUserStore()
+const authStore = useAuthStore()
 
 const isLoggedIn = computed(() => {
-  return userStore.userLoggedIn
+  return authStore.userLoggedIn
 })
 </script>
 
