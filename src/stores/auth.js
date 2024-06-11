@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { supabase } from '@/lib/supabaseClient'
+import { auth } from '@/lib/firebaseClient'
+import { createUserWithEmailAndPassword, signOut } from 'firebase/auth'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -8,36 +9,23 @@ export const useAuthStore = defineStore('auth', {
     loading: false
   }),
   actions: {
-    async signup(email, password) {
-      // this.loading = true
-      // this.error = null
-
-      await supabase.auth.signUp({ email, password })
-      // try {
-      //   const { user, error } = await supabase.auth.signUp({ email, password })
-      //   if (error) throw error
-      //   this.user = user
-      // } catch (error) {
-      //   this.error = error.message
-      // } finally {
-      //   this.loading = false
-      // }
-    },
-    async login(email, password) {
-      this.loading = true
-      this.error = null
+    async register(email, password) {
       try {
-        const { user, error } = await supabase.auth.signIn({ email, password })
-        if (error) throw error
-        this.user = user
+        const { userCredential } = await createUserWithEmailAndPassword(auth, email, password)
+        this.user = userCredential.user
       } catch (error) {
-        this.error = error.message
-      } finally {
-        this.loading = false
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(error)
+        this.error = {
+          errorCode,
+          errorMessage
+        }
       }
     },
+    async login(email, password) {},
     async logout() {
-      await supabase.auth.signOut()
+      await signOut()
       this.user = null
     }
   }

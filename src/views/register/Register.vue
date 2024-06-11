@@ -7,8 +7,9 @@ import { toast } from 'vue3-toastify'
 
 const router = useRouter()
 const authStore = useAuthStore()
-const { emailRules, passwordRules, getConfirmPasswordRules } = useFormRules()
+const { nameRules, emailRules, passwordRules, getConfirmPasswordRules } = useFormRules()
 
+const name = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
@@ -33,15 +34,15 @@ const isRegisterButtonDisabled = computed(() => {
 
 const submitForm = async () => {
   // Handle form submission logic here
-
-  try {
-    //await userStore.register(newUser)
-    await authStore.signup(email.value, password.value)
-    toast.success('Registration successful')
-    setTimeout(router.push('/login'), 10000)
-  } catch (error) {
-    toast.error(error?.response?.data?.message || 'User registration failed')
-  }
+  await authStore.register(email.value, password.value, name.value)
+  // try {
+  //   //await userStore.register(newUser)
+  //   await authStore.signup(email.value, password.value, name.value)
+  //   toast.success('Registration successful')
+  //   setTimeout(router.push('/login'), 10000)
+  // } catch (error) {
+  //   toast.error(error?.response?.data?.message || 'User registration failed')
+  // }
 }
 </script>
 <template>
@@ -64,6 +65,7 @@ const submitForm = async () => {
         <v-card width="90%">
           <v-card-title class="headline sign-up">Sign up</v-card-title>
           <v-form @submit.prevent="submitForm" class="px-3 mt-3">
+            <v-text-field v-model="name" label="Name" :rules="nameRules" required> </v-text-field>
             <v-text-field
               v-model="email"
               label="Email"
