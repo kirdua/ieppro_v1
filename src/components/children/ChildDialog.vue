@@ -68,7 +68,7 @@ const submitChild = async () => {
     accommodations: accommodations.value,
     extendeSchoolYear: extendeSchoolYear.value,
     specialTransportation: specialTransportation.value,
-    _id: _id.value
+    _id: _id.value || null
   }
 
   if (!childInfo.name || !childInfo.dateOfBirth || !childInfo.gradeLevel || !childInfo.diagnoses) {
@@ -78,9 +78,11 @@ const submitChild = async () => {
   try {
     if (childrenStore.editProfile) {
       await childrenStore.updateChildProfile(childInfo)
+      console.log('edit')
       toast.success('Child updated')
     } else {
       await childrenStore.addChild(childInfo)
+      console.log('add')
       toast.success('Child added')
     }
 

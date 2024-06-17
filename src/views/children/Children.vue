@@ -16,7 +16,7 @@ const isLoading = ref(false)
 
 onMounted(() => {
   isLoading.value = true
-  if (!userInfo._id) return
+  if (!userInfo.uid) return
   getChildrenInfo()
 })
 
@@ -34,7 +34,7 @@ const getChildrenInfo = async () => {
 </script>
 <template>
   <div>
-    <add-child :parentId="userInfo._id" @get-child-data="getChildrenInfo" :disabled="isLoading" />
+    <add-child :parentId="userInfo.uid" @get-child-data="getChildrenInfo" :disabled="isLoading" />
     <v-progress-linear v-if="isLoading" color="cyan" indeterminate></v-progress-linear>
 
     <v-row class="pa-3">
@@ -43,7 +43,7 @@ const getChildrenInfo = async () => {
       </v-col>
     </v-row>
     <child-dialog
-      :parentId="userInfo._id"
+      :parentId="userInfo.uid"
       @get-child-data="getChildrenInfo"
       :disabled="isLoading"
     />

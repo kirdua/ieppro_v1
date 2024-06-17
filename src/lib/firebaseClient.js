@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
 import { getAuth } from 'firebase/auth'
-import { getFirestore, collection, doc } from 'firebase/firestore/lite'
+import { getFirestore, collection, doc, serverTimestamp } from 'firebase/firestore'
 
 const apiKey = import.meta.env.VITE_FIREBASE_APIKEY
 const authDomain = import.meta.env.VITE_FIREBASE_AUTHDOMAIN
@@ -30,4 +30,14 @@ const usersCollection = collection(db, 'users')
 const childrenCollection = collection(db, 'children')
 const servicesCollection = collection(db, 'services')
 
-export { app, auth, analytics, db, usersCollection, childrenCollection, servicesCollection, doc }
+export {
+  app,
+  auth,
+  analytics,
+  db,
+  usersCollection,
+  childrenCollection,
+  servicesCollection,
+  doc,
+  serverTimestamp
+}
