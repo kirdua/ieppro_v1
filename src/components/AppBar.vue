@@ -1,12 +1,12 @@
 <script setup>
 import { watch, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import useUserStore from '@/stores/user'
 
 const router = useRouter()
-const authStore = useAuthStore()
+const userStore = useUserStore()
 
-const { logout } = authStore
+const { logout } = userStore
 
 const currentTitle = ref('')
 

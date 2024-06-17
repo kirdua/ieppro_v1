@@ -24,7 +24,6 @@ const userName = computed(() => {
       </v-list-item>
 
       <v-divider></v-divider>
-
       <v-list density="compact" nav>
         <v-list-item
           v-for="item in items"

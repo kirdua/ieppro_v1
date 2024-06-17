@@ -1,12 +1,12 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import useUserStore from '@/stores/user'
 import { useFormRules } from '../../utils/validation'
 import { toast } from 'vue3-toastify'
 
 const router = useRouter()
-const authStore = useAuthStore()
+const userStore = useUserStore()
 const { nameRules, emailRules, passwordRules, getConfirmPasswordRules } = useFormRules()
 
 const name = ref('')
@@ -33,16 +33,19 @@ const isRegisterButtonDisabled = computed(() => {
 })
 
 const submitForm = async () => {
-  // Handle form submission logic here
-  await authStore.register(email.value, password.value, name.value)
-  // try {
-  //   //await userStore.register(newUser)
-  //   await authStore.signup(email.value, password.value, name.value)
-  //   toast.success('Registration successful')
-  //   setTimeout(router.push('/login'), 10000)
-  // } catch (error) {
-  //   toast.error(error?.response?.data?.message || 'User registration failed')
-  // }
+  try {
+    const user = {
+      email: email.value,
+      password: password.value,
+      name: name.value
+    }
+    await userStore.register(user)
+    toast.success('Registration successful')
+    setTimeout(router.push('/'), 10000)
+  } catch (error) {
+    console.error(error)
+    toast.error(error?.response?.data?.message || 'User registration failed')
+  }
 }
 </script>
 <template>
@@ -58,10 +61,6 @@ const submitForm = async () => {
       </v-col>
 
       <v-col cols="8" class="h-screen background-2 d-flex align-center justify-center">
-        <div v-if="registrationError" class="error-message">
-          {{ registrationError }}
-        </div>
-
         <v-card width="90%">
           <v-card-title class="headline sign-up">Sign up</v-card-title>
           <v-form @submit.prevent="submitForm" class="px-3 mt-3">
