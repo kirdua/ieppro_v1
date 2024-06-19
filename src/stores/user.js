@@ -1,7 +1,8 @@
+// src/stores/user.js
 import { defineStore } from 'pinia'
-import { auth, db, doc, usersCollection } from '@/lib/firebaseClient'
+import { auth, usersCollection, doc, serverTimestamp } from '@/lib/firebaseClient'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
-import { setDoc, getDoc } from 'firebase/firestore/lite'
+import { setDoc, getDoc } from 'firebase/firestore'
 import moment from 'moment'
 
 const initialState = {
@@ -10,7 +11,6 @@ const initialState = {
 
 export default defineStore('user', {
   state: () => ({
-    initialState,
     userInfo: initialState.userInfo,
     userLoggedIn: initialState.userInfo !== null
   }),
@@ -42,9 +42,10 @@ export default defineStore('user', {
       const { email, password } = values
       const userCred = await signInWithEmailAndPassword(auth, email, password)
 
-      // Fetch user data from Firestore
       const userDocRef = doc(usersCollection, userCred.user.uid)
       const userDoc = await getDoc(userDocRef)
+
+      console.log(userDoc)
 
       if (userDoc.exists()) {
         const userData = userDoc.data()
@@ -56,12 +57,6 @@ export default defineStore('user', {
         localStorage.setItem('userInfo', JSON.stringify(currentUser))
       }
     },
-    // async updateUserProfile(values) {
-    //   const userDocRef = doc(usersCollection, userCred.user.uid)
-    //   const userDoc = await getDoc(userDocRef)
-    //   this.userInfo = data
-    //   localStorage.setItem('userInfo', JSON.stringify(data))
-    // },
     async logout() {
       await signOut(auth)
       localStorage.removeItem('userInfo')

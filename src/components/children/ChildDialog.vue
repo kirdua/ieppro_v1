@@ -5,8 +5,10 @@ import { useFormRules } from '@/utils/validation'
 import useChildrenStore from '@/stores/children'
 import { toast } from 'vue3-toastify'
 import { readableTimestamp } from '@/utils/date-format'
+import { v7 as uuidv7 } from 'uuid'
 
 const childrenStore = useChildrenStore()
+const myuuid = uuidv7()
 
 const props = defineProps(['parentId', 'disabled'])
 const emit = defineEmits(['getChildData'])
@@ -68,7 +70,7 @@ const submitChild = async () => {
     accommodations: accommodations.value,
     extendeSchoolYear: extendeSchoolYear.value,
     specialTransportation: specialTransportation.value,
-    _id: _id.value || null
+    _id: _id.value || myuuid
   }
 
   if (!childInfo.name || !childInfo.dateOfBirth || !childInfo.gradeLevel || !childInfo.diagnoses) {

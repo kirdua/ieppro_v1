@@ -1,8 +1,9 @@
-// src/stores/childrenStore.js
+// Correct import statements
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { db, doc, childrenCollection, serverTimestamp } from '@/lib/firebaseClient'
-import { setDoc, getDocs, updateDoc, deleteDoc } from 'firebase/firestore'
+import { setDoc, getDocs, updateDoc, deleteDoc, query, where, collection } from 'firebase/firestore'
+import moment from 'moment'
 
 const useChildrenStore = defineStore('children', () => {
   const modalIsVisible = ref(false)
@@ -22,12 +23,12 @@ const useChildrenStore = defineStore('children', () => {
   }
 
   const addChild = async (data) => {
-    // replace serverTimestamp with tz timestamp with moment format
+    const formatDate = moment().format()
     try {
       const childProfile = {
         ...data,
-        createdOn: serverTimestamp(),
-        updatedOn: serverTimestamp()
+        createdOn: formatDate,
+        updatedOn: formatDate
       }
       const childDocRef = doc(childrenCollection)
       await setDoc(childDocRef, childProfile)
@@ -37,16 +38,15 @@ const useChildrenStore = defineStore('children', () => {
     }
   }
 
-  const getChildrenProfiles = async () => {
+  const getChildrenProfiles = async (parentId) => {
     try {
-      const querySnapshot = await getDocs(childrenCollection)
-      const childrenData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      const q = query(childrenCollection, where('parentId', '==', parentId))
+      const querySnapshot = await getDocs(q)
+      const childrenData = []
+      querySnapshot.forEach((doc) => {
+        childrenData.push({ id: doc.id, ...doc.data() })
+      })
       children.value = childrenData
-      childNameGrade.value = childrenData.map((item) => ({
-        name: item.name,
-        gradeLevel: item.gradeLevel,
-        id: item.id
-      }))
     } catch (error) {
       console.error('Error getting children profiles:', error)
     }

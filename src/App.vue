@@ -11,7 +11,6 @@ import '@vuepic/vue-datepicker/dist/main.css'
 const userStore = useUserStore()
 
 const isLoggedIn = computed(() => {
-  console.log(userStore)
   return userStore.userLoggedIn
 })
 </script>

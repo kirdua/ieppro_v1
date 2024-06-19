@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { RouterLink, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import useUserStore from '@/stores/user'
-import { useFormRules } from '../../utils/validation'
+import { useFormRules } from '@/utils/validation'
 import { toast } from 'vue3-toastify'
 
 const userStore = useUserStore()
@@ -13,7 +13,6 @@ const email = ref('')
 const password = ref('')
 
 const submitForm = async () => {
-  // Handle form submission logic here
   const userCredentials = {
     email: email.value,
     password: password.value
@@ -23,10 +22,12 @@ const submitForm = async () => {
     await userStore.login(userCredentials)
     router.push('/')
   } catch (error) {
+    console.error(error)
     toast.error(error?.response?.data?.message || 'Login failed')
   }
 }
 </script>
+
 <template>
   <v-sheet class="h-screen">
     <v-row>

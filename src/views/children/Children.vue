@@ -22,7 +22,7 @@ onMounted(() => {
 
 const getChildrenInfo = async () => {
   try {
-    await childStore.getChildrenProfiles()
+    await childStore.getChildrenProfiles(userInfo.uid)
 
     if (childStore.children) {
       isLoading.value = false
