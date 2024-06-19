@@ -1,8 +1,8 @@
 // Correct import statements
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { db, doc, childrenCollection, serverTimestamp } from '@/lib/firebaseClient'
-import { setDoc, getDocs, updateDoc, deleteDoc, query, where, collection } from 'firebase/firestore'
+import { db, doc, childrenCollection } from '@/lib/firebaseClient'
+import { setDoc, getDocs, updateDoc, deleteDoc, query, where } from 'firebase/firestore'
 import moment from 'moment'
 
 const useChildrenStore = defineStore('children', () => {
@@ -11,6 +11,8 @@ const useChildrenStore = defineStore('children', () => {
   const editProfile = ref(false)
   const selectedChildProfile = ref(null)
   const childNameGrade = ref([])
+
+  const formatDate = moment().format()
 
   const toggleModal = () => {
     modalIsVisible.value = !modalIsVisible.value
@@ -23,7 +25,7 @@ const useChildrenStore = defineStore('children', () => {
   }
 
   const addChild = async (data) => {
-    const formatDate = moment().format()
+    const { parentId } = data
     try {
       const childProfile = {
         ...data,
@@ -32,7 +34,7 @@ const useChildrenStore = defineStore('children', () => {
       }
       const childDocRef = doc(childrenCollection)
       await setDoc(childDocRef, childProfile)
-      await getChildrenProfiles()
+      await getChildrenProfiles(parentId)
     } catch (error) {
       console.error('Error adding child profile:', error)
     }
@@ -54,13 +56,31 @@ const useChildrenStore = defineStore('children', () => {
 
   const updateChildProfile = async (data) => {
     try {
-      const childDoc = doc(db, 'children', data.id)
-      const profileData = {
-        ...data,
-        updatedOn: serverTimestamp()
+      // Query for the document based on the _id field
+      const querySnapshot = await getDocs(query(childrenCollection, where('_id', '==', data._id)))
+
+      // Check if the document exists
+      if (!querySnapshot.empty) {
+        // Get the Firestore document ID of the first matching document
+        const docId = querySnapshot.docs[0].id
+
+        // Reference the document using doc() with the collection reference and document ID
+        const childDocRef = doc(childrenCollection, docId)
+
+        // Prepare the data you want to update
+        const profileData = {
+          ...data,
+          updatedOn: formatDate
+        }
+
+        // Use setDoc() to update the document with the new data
+        await setDoc(childDocRef, profileData)
+
+        // Refresh the children profiles
+        await getChildrenProfiles(data.parentId)
+      } else {
+        console.error('Document with _id', data._id, 'not found.')
       }
-      await updateDoc(childDoc, profileData)
-      await getChildrenProfiles() // Refresh the profiles
     } catch (error) {
       console.error('Error updating child profile:', error)
     }

@@ -80,11 +80,9 @@ const submitChild = async () => {
   try {
     if (childrenStore.editProfile) {
       await childrenStore.updateChildProfile(childInfo)
-      console.log('edit')
       toast.success('Child updated')
     } else {
       await childrenStore.addChild(childInfo)
-      console.log('add')
       toast.success('Child added')
     }
 
