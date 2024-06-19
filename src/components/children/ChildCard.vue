@@ -31,8 +31,10 @@ const updateChildInfo = async () => {
 }
 
 const deleteChildInfo = async () => {
+  const { id, parentId } = props.child
+
   try {
-    childrenStore.removeChildProfile()
+    childrenStore.removeChildProfile({ id, parentId })
     toast.success('Child removed')
     emit('getChildData')
   } catch (error) {

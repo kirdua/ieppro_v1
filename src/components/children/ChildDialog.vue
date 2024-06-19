@@ -136,7 +136,6 @@ const cancel = () => {
         label="Special Transportation"
         color="primary"
       ></v-checkbox>
-      {{ specialTransportation }}
       <template v-slot:actions>
         <v-spacer></v-spacer>
         <v-btn @click="submitChild" color="primary"> Submit </v-btn>

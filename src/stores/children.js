@@ -56,27 +56,19 @@ const useChildrenStore = defineStore('children', () => {
 
   const updateChildProfile = async (data) => {
     try {
-      // Query for the document based on the _id field
       const querySnapshot = await getDocs(query(childrenCollection, where('_id', '==', data._id)))
 
-      // Check if the document exists
       if (!querySnapshot.empty) {
-        // Get the Firestore document ID of the first matching document
         const docId = querySnapshot.docs[0].id
-
-        // Reference the document using doc() with the collection reference and document ID
         const childDocRef = doc(childrenCollection, docId)
 
-        // Prepare the data you want to update
         const profileData = {
           ...data,
           updatedOn: formatDate
         }
 
-        // Use setDoc() to update the document with the new data
         await setDoc(childDocRef, profileData)
 
-        // Refresh the children profiles
         await getChildrenProfiles(data.parentId)
       } else {
         console.error('Document with _id', data._id, 'not found.')
@@ -86,11 +78,13 @@ const useChildrenStore = defineStore('children', () => {
     }
   }
 
-  const removeChildProfile = async (id) => {
+  const removeChildProfile = async ({ id, parentId }) => {
+    console.log(id, parentId)
     try {
-      const childDoc = doc(db, 'children', id)
-      await deleteDoc(childDoc)
-      await getChildrenProfiles() // Refresh the profiles
+      const childDocRef = doc(childrenCollection, id)
+
+      await deleteDoc(childDocRef)
+      await getChildrenProfiles(parentId) // Refresh the profiles
     } catch (error) {
       console.error('Error removing child profile:', error)
     }
