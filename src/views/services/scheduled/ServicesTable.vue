@@ -9,7 +9,7 @@ const formatTableData = (value, type) => {
 }
 </script>
 <template>
-  <v-data-table :headers="servicesHeaders" :items="props.items.services" :loading="isLoading">
+  <v-data-table :headers="servicesHeaders" :items="props.items" :loading="isLoading">
     <template v-slot:loading>
       <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
     </template>

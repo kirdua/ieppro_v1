@@ -46,7 +46,9 @@ const useChildrenStore = defineStore('children', () => {
       const querySnapshot = await getDocs(q)
       const childrenData = []
       querySnapshot.forEach((doc) => {
-        childrenData.push({ id: doc.id, ...doc.data() })
+        const data = doc.data()
+        const id = data._id // Access the custom _id field
+        childrenData.push({ id, ...data })
       })
       children.value = childrenData
     } catch (error) {
@@ -79,7 +81,6 @@ const useChildrenStore = defineStore('children', () => {
   }
 
   const removeChildProfile = async ({ id, parentId }) => {
-    console.log(id, parentId)
     try {
       const childDocRef = doc(childrenCollection, id)
 

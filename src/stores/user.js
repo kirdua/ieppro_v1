@@ -1,6 +1,6 @@
 // src/stores/user.js
 import { defineStore } from 'pinia'
-import { auth, usersCollection, doc, serverTimestamp } from '@/lib/firebaseClient'
+import { auth, usersCollection, doc } from '@/lib/firebaseClient'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { setDoc, getDoc } from 'firebase/firestore'
 import moment from 'moment'
@@ -44,8 +44,6 @@ export default defineStore('user', {
 
       const userDocRef = doc(usersCollection, userCred.user.uid)
       const userDoc = await getDoc(userDocRef)
-
-      console.log(userDoc)
 
       if (userDoc.exists()) {
         const userData = userDoc.data()
