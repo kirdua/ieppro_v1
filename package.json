@@ -17,7 +17,6 @@
     "@date-io/dayjs": "^3.0.0",
     "@supabase/supabase-js": "^2.43.4",
     "@vuepic/vue-datepicker": "^8.6.0",
-    "axios": "^1.6.7",
     "date-fns": "^3.6.0",
     "firebase": "^10.12.2",
     "moment": "^2.30.1",
