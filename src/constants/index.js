@@ -4,8 +4,8 @@ export const servicesHeaders = [
   { title: 'Course/Curriculum', align: 'center', key: 'course' },
   { title: 'Location', align: 'center', key: 'location' },
   { title: 'Gen Ed Modified', align: 'center', key: 'genEdModified' },
-  { title: 'Gen Education Time', align: 'center', key: 'genEducationTime' },
-  { title: 'Special Education Time', align: 'center', key: 'specialEducationTime' },
+  { title: 'Gen Ed Time (mins)', align: 'center', key: 'genEducationTime' },
+  { title: 'Special Ed Time (mins)', align: 'center', key: 'specialEducationTime' },
   { title: 'Progress Graded by', align: 'center', key: 'gradedBy' },
   { title: 'Start Date', align: 'center', key: 'startDate' },
   { title: 'End Date', align: 'center', key: 'endDate' }
