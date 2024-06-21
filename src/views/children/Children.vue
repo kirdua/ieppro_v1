@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import AddChild from '@/components/children/AddChild.vue'
 import ChildCard from '@/components/children/ChildCard.vue'
 import ChildDialog from '@/components/children/ChildDialog.vue'
 import { gradeLevels, diagnosesList, accommodationsList } from '@/utils/child-options'
@@ -36,15 +35,24 @@ const getChildrenInfo = async () => {
   <div>
     <v-progress-linear v-if="isLoading" color="cyan" indeterminate></v-progress-linear>
 
-    <v-row class="pa-3">
-      <v-col v-for="child in childStore.children" :key="child._id" cols="12" lg="4" md="4" sm="12">
-        <child-card :child="child" @get-child-data="getChildrenInfo" />
+    <v-row class="pa-3 d-flex flex-wrap justify-center">
+      <v-col
+        v-for="child in childStore.children"
+        :key="child._id"
+        class="d-flex justify-center"
+        style="max-width: 100%"
+      >
+        <child-card :child="child" @get-child-data="getChildrenInfo" class="mx-2 my-2" />
       </v-col>
     </v-row>
-    <child-dialog
-      :parentId="userInfo.uid"
-      @get-child-data="getChildrenInfo"
-      :disabled="isLoading"
-    />
+    <v-row>
+      <v-col>
+        <child-dialog
+          :parentId="userInfo.uid"
+          @get-child-data="getChildrenInfo"
+          :disabled="isLoading"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>

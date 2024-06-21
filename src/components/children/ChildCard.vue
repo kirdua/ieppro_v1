@@ -48,8 +48,8 @@ const goToAddServices = (id, grade) => {
 </script>
 <template>
   <v-card
-    width="500"
-    height="375"
+    width="596"
+    height="400"
     prepend-icon="mdi-account"
     color="flat"
     :title="props.child.name"
