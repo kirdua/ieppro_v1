@@ -2,12 +2,15 @@
 import { watch, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import useUserStore from '@/stores/user'
+import useChildrenStore from '@/stores/children'
+import useServicesStore from '@/stores/services'
 
-import AddChild from '@/components/children/AddChild.vue'
-import AddScheduledServices from '@/components/scheduled-services/AddScheduledServices.vue'
+import AddButton from './AddButton.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const childrenStore = useChildrenStore()
+const servicesStore = useServicesStore()
 
 const { logout } = userStore
 
@@ -34,6 +37,12 @@ watch(
     currentTitle.value = to.meta.header
   }
 )
+
+const handleAddScheduledServices = () => {
+  const currentChildProfile = servicesStore.currentChildProfile.value
+  const { id, gradeLevel } = currentChildProfile
+  router.push({ name: 'add-services', query: { id, grade: gradeLevel } })
+}
 </script>
 <template>
   <v-app-bar flat class="justify-end">
@@ -44,8 +53,19 @@ watch(
     <v-app-bar-title></v-app-bar-title>
 
     <v-spacer></v-spacer>
-    <add-child v-if="currentTitle === 'Children Profiles'" class="align-center" />
-    <add-scheduled-services v-if="currentTitle === 'Scheduled Services'" class="align-center" />
+
+    <add-button
+      v-if="currentTitle === 'Children Profiles'"
+      :buttonText="'Add Child'"
+      :handleClick="childrenStore.toggleModal"
+    />
+
+    <add-button
+      v-if="currentTitle === 'Scheduled Services'"
+      :buttonText="'Add Scheduled Services'"
+      :handleClick="handleAddScheduledServices"
+    />
+
     <v-menu open-on-hover class="justify-end">
       <template v-slot:activator="{ props }">
         <v-btn icon color="primary" v-bind="props">
