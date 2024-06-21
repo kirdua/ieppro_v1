@@ -19,6 +19,7 @@ Built with the latest Vite and Vue composition api, this project, allows parent'
 - Vite
 - VueJS
 - Vuetify
+- Firebase
 
 ## <a name="features">🔋 Features</a>
 

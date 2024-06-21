@@ -5,7 +5,7 @@ import useUserStore from '@/stores/user'
 import useChildrenStore from '@/stores/children'
 import useServicesStore from '@/stores/services'
 
-import AddButton from './AddButton.vue'
+import AddButton from './button/AddButton.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
