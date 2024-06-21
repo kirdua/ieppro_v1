@@ -5,6 +5,7 @@ import { addDoc, getDocs, query, where } from 'firebase/firestore'
 
 const useServicesStore = defineStore('services', () => {
   const currentServices = ref([])
+  const currentChildProfile = ref({})
 
   const getServicesByGradeLevel = async ({ id, gradeLevel }) => {
     try {
@@ -49,7 +50,8 @@ const useServicesStore = defineStore('services', () => {
   return {
     currentServices,
     getServicesByGradeLevel,
-    addScheduledServices
+    addScheduledServices,
+    currentChildProfile
   }
 })
 

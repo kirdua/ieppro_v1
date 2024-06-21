@@ -65,6 +65,9 @@ const getServices = async () => {
     id: selectedChildId.value,
     gradeLevel: currentGrade.value
   }
+  servicesStore.currentChildProfile.value = params
+
+  console.log(servicesStore.currentChildProfile)
   try {
     await servicesStore.getServicesByGradeLevel(params)
   } catch (error) {
