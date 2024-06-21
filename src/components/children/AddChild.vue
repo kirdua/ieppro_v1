@@ -4,8 +4,14 @@ const childrenStore = useChildrenStore()
 </script>
 
 <template>
-  <div class="d-flex justify-end mt-5 mr-5">
-    <v-btn color="primary" rippel @click="childrenStore.toggleModal" :disabled="disabled">
+  <div class="d-flex justify-end mr-5">
+    <v-btn
+      color="blue-1"
+      variant="outlined"
+      rippel
+      @click="childrenStore.toggleModal"
+      :disabled="disabled"
+    >
       Add Child
     </v-btn>
   </div>

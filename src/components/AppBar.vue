@@ -3,6 +3,8 @@ import { watch, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import useUserStore from '@/stores/user'
 
+import AddChild from '@/components/children/AddChild.vue'
+
 const router = useRouter()
 const userStore = useUserStore()
 
@@ -39,6 +41,9 @@ watch(
     </template>
 
     <v-app-bar-title></v-app-bar-title>
+
+    <v-spacer></v-spacer>
+    <add-child v-if="currentTitle === 'Children Profiles'" class="align-center" />
     <v-menu open-on-hover class="justify-end">
       <template v-slot:activator="{ props }">
         <v-btn icon color="primary" v-bind="props">

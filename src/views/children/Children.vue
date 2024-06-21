@@ -34,7 +34,6 @@ const getChildrenInfo = async () => {
 </script>
 <template>
   <div>
-    <add-child :parentId="userInfo.uid" @get-child-data="getChildrenInfo" :disabled="isLoading" />
     <v-progress-linear v-if="isLoading" color="cyan" indeterminate></v-progress-linear>
 
     <v-row class="pa-3">
