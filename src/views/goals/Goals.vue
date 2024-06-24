@@ -1,11 +1,13 @@
 <script setup>
 import GoalsMenu from './GoalsMenu.vue'
 import GoalsDetail from './GoalsDetails.vue'
+import GoalsList from '@/components/goals/GoalsList.vue'
 </script>
 
 <template>
   <div class="goals-container">
-    <GoalsMenu class="goals-menu" />
+    <GoalsList />
+    <!-- <GoalsMenu class="goals-menu" /> -->
     <GoalsDetail class="goals-detail" />
   </div>
 </template>

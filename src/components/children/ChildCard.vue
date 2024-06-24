@@ -57,7 +57,7 @@ const goToAddServices = (id, grade) => {
 
     <v-card-actions class="d-flex justify-end mt-10">
       <div>
-        <v-btn color="white-1" variant="outlined" @click="updateChildInfo">View/Edit</v-btn>
+        <v-btn color="white-1" variant="outlined" @click="updateChildInfo">View/Edit Profile</v-btn>
         <v-btn
           color="white-1"
           variant="outlined"

@@ -115,7 +115,7 @@ const cancel = () => {
       <v-select
         v-model="diagnoses"
         :items="diagnosesList"
-        label="Diagnoses"
+        label="Qualifications"
         chips
         multiple
       ></v-select>
