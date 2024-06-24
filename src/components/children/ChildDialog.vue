@@ -102,7 +102,7 @@ const cancel = () => {
 </script>
 
 <template>
-  <v-dialog v-model="childrenStore.modalIsVisible" max-width="400" persistent>
+  <v-dialog v-model="childrenStore.modalIsVisible" max-width="400">
     <v-card class="pa-4">
       <v-card-title>Child's Information</v-card-title>
       <v-text-field v-model="name" placeholder="Child's name" class="p-1"></v-text-field>
@@ -138,8 +138,8 @@ const cancel = () => {
       ></v-checkbox>
       <template v-slot:actions>
         <v-spacer></v-spacer>
-        <v-btn @click="submitChild" color="primary"> Submit </v-btn>
         <v-btn @click="cancel"> Cancel </v-btn>
+        <v-btn @click="submitChild" color="primary"> Submit </v-btn>
       </template>
     </v-card>
   </v-dialog>

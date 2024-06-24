@@ -17,6 +17,7 @@ const myCustomTheme = {
     'blue-1': '#125D98',
     'blue-2': '#3c8dad;',
     red: '#FF5959',
+    'soft-red': '#FA7070',
     primary: '#2E3A87',
     error: '#FF5252',
     info: '#baf2d8',

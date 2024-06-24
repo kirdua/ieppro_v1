@@ -15,26 +15,16 @@ const birthDate = computed(() => {
   return readableTimestamp(props.child.dateOfBirth)
 })
 
-const extendedSchoolYear = computed(() => {
-  const esy = props.child.extendedSchoolYear
-  return esy ? 'Yes' : 'No'
-})
-
-const specialTransportation = computed(() => {
-  const specialTransportation = props.child.specialTransportation
-  return specialTransportation ? 'Yes' : 'No'
-})
-
 const updateChildInfo = async () => {
   childrenStore.toggleModal()
   childrenStore.editChildProfile(props.child)
 }
 
 const deleteChildInfo = async () => {
-  const { id, parentId } = props.child
-
+  const { _id, parentId } = props.child
+  console.log(props.child)
   try {
-    childrenStore.removeChildProfile({ id, parentId })
+    childrenStore.deleteChildProfile({ _id, parentId })
     toast.success('Child removed')
     emit('getChildData')
   } catch (error) {
@@ -47,47 +37,30 @@ const goToAddServices = (id, grade) => {
 }
 </script>
 <template>
-  <v-card
-    width="596"
-    height="400"
-    prepend-icon="mdi-account"
-    color="flat"
-    :title="props.child.name"
-  >
-    <v-card-text class="pa-2 card-bg">
-      <div><strong>Date of Birth:</strong> {{ birthDate }}</div>
-      <div><strong>Grade Level:</strong> {{ props.child.gradeLevel }}</div>
-      <div>
-        <strong>Diagnoses: </strong>
-        <br />
-        <span v-for="diagnosis in props.child.diagnoses" :key="diagnosis">
-          {{ diagnosis }}
-          <br />
-        </span>
-      </div>
-      <div>
-        <strong>Accommodations: </strong><br />
-        <span v-for="accommodation in props.child.accommodations" :key="accommodation">
-          {{ accommodation }}
-          <br />
-        </span>
-      </div>
-      <div>
-        <strong>Extended School Year:</strong>
-        {{ extendedSchoolYear }}
-      </div>
-      <div>
-        <strong>Special Transportation:</strong>
-        {{ specialTransportation }}
-      </div>
-    </v-card-text>
+  <v-card width="596" height="200" elevation="16" color="#385F73" class="d-flex flex-column">
+    <v-card-title class="d-flex align-center blue darken-1 text-h5">
+      <v-icon color="white-1">mdi-account</v-icon>
+      <span class="ml-2">{{ props.child.name }}</span>
+      <v-spacer></v-spacer>
+      <v-icon
+        color="white-1"
+        class="cursor-pointer text-h5"
+        v-tooltip="'Delete Profile'"
+        @click="deleteChildInfo"
+        >mdi-close</v-icon
+      >
+    </v-card-title>
+    <v-card-subtitle class="d-flex justify-space-between">
+      <strong class="text-h5">Date of Birth: {{ birthDate }}</strong>
+      <strong class="text-h5">Grade Level: {{ props.child.gradeLevel }}</strong>
+    </v-card-subtitle>
+
     <v-card-actions class="d-flex justify-end mt-10">
       <div>
-        <v-btn color="error" variant="flat" @click="deleteChildInfo">Delete</v-btn>
-        <v-btn color="primary" variant="flat" @click="updateChildInfo">Edit</v-btn>
+        <v-btn color="white-1" variant="outlined" @click="updateChildInfo">View/Edit</v-btn>
         <v-btn
-          color="primary"
-          variant="flat"
+          color="white-1"
+          variant="outlined"
           @click="goToAddServices(props.child._id, props.child.gradeLevel)"
           >Add Special Services</v-btn
         >
@@ -95,7 +68,6 @@ const goToAddServices = (id, grade) => {
     </v-card-actions>
   </v-card>
 </template>
-
 <style>
 .card-bg {
   background-color: '#152A38' !important;

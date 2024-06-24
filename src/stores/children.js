@@ -47,7 +47,7 @@ const useChildrenStore = defineStore('children', () => {
       const childrenData = []
       querySnapshot.forEach((doc) => {
         const data = doc.data()
-        const id = data._id // Access the custom _id field
+        const id = data._id
         childrenData.push({ id, ...data })
       })
       children.value = childrenData
@@ -80,12 +80,34 @@ const useChildrenStore = defineStore('children', () => {
     }
   }
 
-  const removeChildProfile = async ({ id, parentId }) => {
+  const deleteChildProfile = async ({ _id, parentId }) => {
     try {
-      const childDocRef = doc(childrenCollection, id)
+      // Query the collection to find the document with the matching _id and parentId
+      const q = query(
+        childrenCollection,
+        where('_id', '==', _id),
+        where('parentId', '==', parentId)
+      )
+      const querySnapshot = await getDocs(q)
 
-      await deleteDoc(childDocRef)
-      await getChildrenProfiles(parentId) // Refresh the profiles
+      // Check if any documents match the query
+      if (!querySnapshot.empty) {
+        // Loop through the documents and delete them
+        querySnapshot.forEach(async (docSnapshot) => {
+          // Get the document reference
+          const childDocRef = doc(childrenCollection, docSnapshot.id)
+
+          // Delete the document
+          await deleteDoc(childDocRef)
+          console.log(`Child profile with ID ${docSnapshot.id} deleted successfully.`)
+        })
+
+        // Refresh the profiles
+        await getChildrenProfiles(parentId)
+        console.log('Children profiles refreshed.')
+      } else {
+        console.error(`No document found with _id: ${_id} and parentId: ${parentId}`)
+      }
     } catch (error) {
       console.error('Error removing child profile:', error)
     }
@@ -101,7 +123,7 @@ const useChildrenStore = defineStore('children', () => {
     addChild,
     getChildrenProfiles,
     updateChildProfile,
-    removeChildProfile,
+    deleteChildProfile,
     editChildProfile
   }
 })
