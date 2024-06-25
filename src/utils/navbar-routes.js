@@ -14,7 +14,7 @@ const navbarRoutes = [
   {
     title: 'Goals',
     value: 'goals',
-    icon: 'mdi-flag-checkered',
+    icon: 'mdi-check-circle',
     route: 'goals'
   },
   {

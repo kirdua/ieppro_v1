@@ -1,14 +1,14 @@
 <script setup>
-import GoalsMenu from './GoalsMenu.vue'
 import GoalsDetail from './GoalsDetails.vue'
-import GoalsList from '@/components/goals/GoalsList.vue'
+import GoalsSidebar from './GoalsSidebar.vue'
+import AddGoals from './add/AddGoalsDialog.vue'
 </script>
 
 <template>
   <div class="goals-container">
-    <GoalsList />
-    <!-- <GoalsMenu class="goals-menu" /> -->
+    <GoalsSidebar />
     <GoalsDetail class="goals-detail" />
+    <add-goals />
   </div>
 </template>
 

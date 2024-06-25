@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import useUserStore from '@/stores/user'
 import useChildrenStore from '@/stores/children'
 import useServicesStore from '@/stores/services'
+import useGoalsStore from '@/stores/goals'
 
 import AddButton from './button/AddButton.vue'
 
@@ -11,6 +12,7 @@ const router = useRouter()
 const userStore = useUserStore()
 const childrenStore = useChildrenStore()
 const servicesStore = useServicesStore()
+const goalsStore = useGoalsStore()
 
 const { logout } = userStore
 
@@ -64,6 +66,12 @@ const handleAddScheduledServices = () => {
       v-if="currentTitle === 'Scheduled Services'"
       :buttonText="'Add Scheduled Services'"
       :handleClick="handleAddScheduledServices"
+    />
+
+    <add-button
+      v-if="currentTitle === 'Goals'"
+      :buttonText="'Add Goals'"
+      :handleClick="goalsStore.toggleModal"
     />
 
     <v-menu open-on-hover class="justify-end">

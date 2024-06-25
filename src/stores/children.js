@@ -1,4 +1,3 @@
-// Correct import statements
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { db, doc, childrenCollection } from '@/lib/firebaseClient'
