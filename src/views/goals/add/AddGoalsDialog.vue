@@ -1,14 +1,16 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, toRaw } from 'vue'
 import useGoalsStore from '@/stores/goals'
 import { progressGradedByOptions } from '@/constants'
 
 const goalsStore = useGoalsStore()
 const goalTypeItems = ['Academic', 'Functional', 'Related Services']
 
+const emit = defineEmits(['save-goals'])
+
 const goalFocus = ref('')
 const goalType = ref(goalTypeItems[0])
-const benchmarks = ref(['']) // Initialize with one empty benchmark
+const benchmarks = ref([''])
 const currentImplementer = ref(progressGradedByOptions[1])
 
 const addBenchmark = () => {
@@ -27,12 +29,20 @@ const closeGoalsModal = () => {
   currentImplementer.value = progressGradedByOptions[1]
 }
 
-const addGoal = () => {}
+const saveGoal = () => {
+  emit('save-goals', {
+    goalFocus: goalFocus.value,
+    goalType: goalType.value,
+    benchmarks: toRaw(benchmarks.value),
+    implmenter: currentImplementer.value
+  })
+  goalsStore.modalIsVisible = false
+}
 </script>
 
 <template>
   <v-dialog v-model="goalsStore.modalIsVisible" max-width="600">
-    <v-card prepend-icon="mdi-check-circle" class="text-blue" title="Goals">
+    <v-card prepend-icon="mdi-check-circle" class="text-blue" title="Goal">
       <v-card-text>
         <v-row dense>
           <v-col cols="12" md="6" sm="6">
@@ -93,12 +103,7 @@ const addGoal = () => {}
 
         <v-btn text="Close" variant="plain" @click="closeGoalsModal"></v-btn>
 
-        <v-btn
-          color="primary"
-          text="Save"
-          variant="tonal"
-          @click="goalsStore.modalIsVisible = false"
-        ></v-btn>
+        <v-btn color="primary" text="Save" variant="tonal" @click="saveGoal"></v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

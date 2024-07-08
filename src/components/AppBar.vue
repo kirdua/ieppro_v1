@@ -45,6 +45,12 @@ const handleAddScheduledServices = () => {
   const { id, gradeLevel } = currentChildProfile
   router.push({ name: 'add-services', query: { id, grade: gradeLevel } })
 }
+
+const handleAddGoals = () => {
+  const currentChildProfile = goalsStore.currentChildProfile
+  const { id, gradeLevel } = currentChildProfile
+  router.push({ name: 'add-goals', query: { id, grade: gradeLevel } })
+}
 </script>
 <template>
   <v-app-bar flat class="justify-end">
@@ -53,7 +59,6 @@ const handleAddScheduledServices = () => {
     </template>
 
     <v-app-bar-title></v-app-bar-title>
-
     <v-spacer></v-spacer>
 
     <add-button
@@ -71,7 +76,7 @@ const handleAddScheduledServices = () => {
     <add-button
       v-if="currentTitle === 'Goals'"
       :buttonText="'Add Goals'"
-      :handleClick="goalsStore.toggleModal"
+      :handleClick="handleAddGoals"
     />
 
     <v-menu open-on-hover class="justify-end">

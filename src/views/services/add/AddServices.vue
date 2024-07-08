@@ -1,25 +1,11 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 import ServiceSelect from './ServiceSelect.vue'
-import useChildrenStore from '@/stores/children'
-
-const route = useRoute()
-const childStore = useChildrenStore()
 
 const services = ref([])
 
-onMounted(() => {
-  console.log(route.query)
-})
-
 const handleServicesSelected = (selectedService) => {
-  console.log(selectedService)
   services.value.push(selectedService)
-}
-
-const handleSubmitForm = () => {
-  console.log('fired')
 }
 </script>
 <template>

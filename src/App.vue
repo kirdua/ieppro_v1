@@ -22,9 +22,7 @@ const isLoggedIn = computed(() => {
     <v-main>
       <app-bar v-if="isLoggedIn" />
       <router-view v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
-          <component :is="Component"></component>
-        </transition>
+        <component :is="Component"></component>
       </router-view>
     </v-main>
   </v-app>

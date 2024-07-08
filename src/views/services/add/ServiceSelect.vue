@@ -121,12 +121,12 @@ const formatEndDate = (date) => {
         @click="submitScheduledServices"
       ></v-btn>
     </div>
-    <v-row>
+    <v-row class="pa-2">
       <v-col cols="12">
         <v-data-table
           :headers="servicesHeaders"
           :items="servicesScheduled"
-          :no-data-text="'Add Scheduled Services'"
+          :no-data-text="'Add Goals'"
         >
           <template #bottom></template>
         </v-data-table>

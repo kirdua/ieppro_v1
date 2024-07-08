@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { db, doc, childrenCollection } from '@/lib/firebaseClient'
-import { setDoc, getDocs, updateDoc, deleteDoc, query, where } from 'firebase/firestore'
+import { doc, childrenCollection } from '@/lib/firebaseClient'
+import { setDoc, getDocs, deleteDoc, query, where } from 'firebase/firestore'
 import moment from 'moment'
 
 const useChildrenStore = defineStore('children', () => {

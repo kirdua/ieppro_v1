@@ -29,6 +29,7 @@ const db = getFirestore(app)
 const usersCollection = collection(db, 'users')
 const childrenCollection = collection(db, 'children')
 const servicesCollection = collection(db, 'services')
+const goalsCollection = collection(db, 'goals')
 
 export {
   app,
@@ -38,6 +39,7 @@ export {
   usersCollection,
   childrenCollection,
   servicesCollection,
+  goalsCollection,
   doc,
   serverTimestamp
 }
