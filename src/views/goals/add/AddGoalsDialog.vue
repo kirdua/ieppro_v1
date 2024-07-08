@@ -6,10 +6,12 @@ import { progressGradedByOptions } from '@/constants'
 const goalsStore = useGoalsStore()
 const goalTypeItems = ['Academic', 'Functional', 'Related Services']
 
-const emit = defineEmits(['save-goals'])
+const emit = defineEmits(['save-goal'])
 
 const goalFocus = ref('')
 const goalType = ref(goalTypeItems[0])
+const currentPerformance = ref('')
+const duration = ref('')
 const benchmarks = ref([''])
 const currentImplementer = ref(progressGradedByOptions[1])
 
@@ -25,18 +27,22 @@ const closeGoalsModal = () => {
   goalsStore.modalIsVisible = false
   goalFocus.value = ''
   goalType.value = goalTypeItems[0]
-  benchmarks.value = []
+  currentPerformance.value = ''
+  duration.value = ''
+  benchmarks.value = ['']
   currentImplementer.value = progressGradedByOptions[1]
 }
 
 const saveGoal = () => {
-  emit('save-goals', {
+  emit('save-goal', {
     goalFocus: goalFocus.value,
     goalType: goalType.value,
+    currentPerformance: currentPerformance.value,
+    duration: duration.value,
     benchmarks: toRaw(benchmarks.value),
     implmenter: currentImplementer.value
   })
-  goalsStore.modalIsVisible = false
+  closeGoalsModal()
 }
 </script>
 
@@ -64,11 +70,15 @@ const saveGoal = () => {
           </v-col>
 
           <v-col cols="12" md="12" sm="12">
-            <v-text-field label="Current performance" required></v-text-field>
+            <v-text-field
+              v-model="currentPerformance"
+              label="Current performance"
+              required
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" md="12" sm="12">
-            <v-text-field label="Duration"></v-text-field>
+            <v-text-field v-model="duration" label="Duration"></v-text-field>
           </v-col>
 
           <v-col cols="12" md="12" sm="12" v-for="(benchmark, index) in benchmarks" :key="index">

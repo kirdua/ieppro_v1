@@ -13,7 +13,9 @@ const useGoalsStore = defineStore('goals', () => {
     modalIsVisible.value = !modalIsVisible.value
   }
 
-  const addGoalsToGradeLevel = (params) => {}
+  const addGoalsToGradeLevel = (params) => {
+    console.log(params)
+  }
 
   const getGoalsByGradeLevel = () => {}
   const updateGoalsByGradeLevel = () => {}

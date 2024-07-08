@@ -11,6 +11,39 @@ export const servicesHeaders = [
   { title: 'End Date', align: 'center', key: 'endDate' }
 ]
 
+export const goalHeaders = [
+  {
+    title: 'Goal Focus',
+    align: 'center',
+    key: 'goalFocus'
+  },
+  {
+    title: 'Goal Type',
+    align: 'center',
+    key: 'goalType'
+  },
+  {
+    title: 'Current Performance',
+    align: 'center',
+    key: 'currentPerformance'
+  },
+  {
+    title: 'Duration',
+    align: 'center',
+    key: 'duration'
+  },
+  {
+    title: 'Benchmark',
+    align: 'center',
+    key: 'benchmark'
+  },
+  {
+    title: 'Implmenter',
+    align: 'center',
+    key: 'implmenter'
+  }
+]
+
 export const semesterOptions = ['Full IEP Year', 'Fall', 'Spring', 'Summer']
 
 export const locationOptions = [
