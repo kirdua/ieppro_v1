@@ -13,10 +13,23 @@ const rail = ref(true)
 const userName = computed(() => {
   return userInfo.name.split(' ')[0]
 })
+
+const activeItem = ref('') // Store the active item route
+
+const setActiveItem = (route) => {
+  activeItem.value = route
+}
 </script>
+
 <template>
   <v-card>
-    <v-navigation-drawer v-model="drawer" :rail="rail" permanent @click="rail = false">
+    <v-navigation-drawer
+      v-model="drawer"
+      :rail="rail"
+      permanent
+      @click="rail = false"
+      color="lightblue"
+    >
       <v-list-item :title="userName" nav>
         <template v-slot:append>
           <v-btn icon="mdi-chevron-left" variant="text" @click.stop="rail = !rail"></v-btn>
@@ -24,7 +37,7 @@ const userName = computed(() => {
       </v-list-item>
 
       <v-divider></v-divider>
-      <v-list density="compact" nav>
+      <v-list nav>
         <v-list-item
           v-for="item in items"
           :key="item.title"
@@ -32,8 +45,18 @@ const userName = computed(() => {
           :title="item.title"
           :value="item.value"
           :to="item.route"
+          :active-class="'selected-item'"
+          @click="setActiveItem(item.route)"
+          :class="{ 'selected-item': activeItem === item.route }"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
   </v-card>
 </template>
+
+<style>
+.selected-item {
+  background-color: #606676;
+  color: #eee; /* Replace with your desired color */
+}
+</style>

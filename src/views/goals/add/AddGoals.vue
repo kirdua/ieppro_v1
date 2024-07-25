@@ -1,12 +1,17 @@
 <script setup>
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { goalHeaders } from '@/constants'
-import useChildrenStore from '@/stores/children'
 import useGoalsStore from '@/stores/goals'
 import AddGoalsDialog from './AddGoalsDialog.vue'
+import { toast } from 'vue3-toastify'
 
-const childStore = useChildrenStore()
 const goalsStore = useGoalsStore()
+
+const route = useRoute()
+const router = useRouter()
+const id = route.query.id
+const grade = route.query.grade
 
 const currentGoals = ref([])
 
@@ -14,8 +19,24 @@ const handleSaveGoal = (data) => {
   currentGoals.value.push(data)
 }
 
-const submitGoals = () => {
-  goalsStore.addGoalsToGradeLevel(currentGoals)
+const submitGoals = async () => {
+  if (!currentGoals.value.length) return
+
+  const goalsData = {
+    goals: currentGoals.value,
+    id,
+    grade
+  }
+
+  try {
+    await goalsStore.addGoalsToGradeLevel(goalsData)
+    toast.success('Goals added')
+    setTimeout(() => {
+      router.push('/goals')
+    }, 5000)
+  } catch (error) {
+    toast.error(error?.response?.data?.message || 'Add goals failed')
+  }
 }
 </script>
 <template>

@@ -83,6 +83,7 @@ const submitChild = async () => {
       toast.success('Child updated')
     } else {
       await childrenStore.addChild(childInfo)
+
       toast.success('Child added')
     }
 
@@ -93,6 +94,7 @@ const submitChild = async () => {
     const updateAdd = childrenStore.editProfile ? 'update' : 'registration'
     toast.error(error?.response?.data?.message || `Child ${updateAdd} failed`)
   }
+  childrenStore.error = 'There is an error!'
 }
 
 const cancel = () => {

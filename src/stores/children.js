@@ -10,6 +10,7 @@ const useChildrenStore = defineStore('children', () => {
   const editProfile = ref(false)
   const selectedChildProfile = ref(null)
   const childNameGrade = ref([])
+  const error = ref('')
 
   const formatDate = moment().format()
 
@@ -25,18 +26,14 @@ const useChildrenStore = defineStore('children', () => {
 
   const addChild = async (data) => {
     const { parentId } = data
-    try {
-      const childProfile = {
-        ...data,
-        createdOn: formatDate,
-        updatedOn: formatDate
-      }
-      const childDocRef = doc(childrenCollection)
-      await setDoc(childDocRef, childProfile)
-      await getChildrenProfiles(parentId)
-    } catch (error) {
-      console.error('Error adding child profile:', error)
+    const childProfile = {
+      ...data,
+      createdOn: formatDate,
+      updatedOn: formatDate
     }
+    const childDocRef = doc(childrenCollection)
+    await setDoc(childDocRef, childProfile)
+    await getChildrenProfiles(parentId)
   }
 
   const getChildrenProfiles = async (parentId) => {
