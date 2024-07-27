@@ -5,9 +5,9 @@ import useUserStore from '@/stores/user'
 import useChildrenStore from '@/stores/children'
 import useGoalsStore from '@/stores/goals'
 
-import GoalsDetail from './GoalsDetails.vue'
-import GoalsSidebar from './GoalsSidebar.vue'
-import AddGoals from './add/AddGoalsDialog.vue'
+import GoalsTable from './GoalsTable.vue'
+import GoalsSidebar from '../goals/GoalsSidebar.vue'
+import AddGoals from '../add/AddGoalsDialog.vue'
 
 const userStore = useUserStore()
 const childStore = useChildrenStore()
@@ -78,8 +78,8 @@ const saveGoals = (data) => {
     </div>
   </div>
   <div>
-    <!-- <GoalsSidebar />
-    <GoalsDetail class="goals-detail" /> -->
+    <!-- <GoalsSidebar />-->
+    <GoalsTable :items="test" />
     <add-goals @save-goals="saveGoals" :currentSelectedChild="currentSelectedChild" />
   </div>
 </template>

@@ -10,7 +10,6 @@ const useChildrenStore = defineStore('children', () => {
   const editProfile = ref(false)
   const selectedChildProfile = ref(null)
   const childNameGrade = ref([])
-  const error = ref('')
 
   const formatDate = moment().format()
 

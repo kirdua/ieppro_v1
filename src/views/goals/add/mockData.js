@@ -25,7 +25,7 @@ const annualGoals = [
             benchmarkGoal: ''
           }
         ],
-        implmenter: 'Special Education Teacher',
+        implementer: 'Special Education Teacher',
         evaluationMethods: ['Data Collection', 'Observations'],
         createdAt: 'Date',
         updatedAt: 'Date'
@@ -58,7 +58,7 @@ const annualGoals = [
             benchmarkGoal: ''
           }
         ],
-        implmenter: 'Special Education Teacher',
+        implementer: 'Special Education Teacher',
         evaluationMethods: ['Data Collection', 'Observations'],
         reportingFrequency: 'Concurrent with issuance of report card'
       }
@@ -98,7 +98,7 @@ const annualGoals = [
             benchmarkGoal: ''
           }
         ],
-        implmenter: 'Special Education Teacher',
+        implementer: 'Special Education Teacher',
         evaluationMethods: ['Data Collection', 'Observations'],
         reportingFrequency: 'Concurrent with issuance of report card',
         createdAt: 'Date',
@@ -132,7 +132,7 @@ const annualGoals = [
             benchmarkGoal: ''
           }
         ],
-        implmenter: 'Special Education Teacher',
+        implementer: 'Special Education Teacher',
         evaluationMethods: ['Data Collection', 'Observations'],
         reportingFrequency: 'Concurrent with issuance of report card'
       }

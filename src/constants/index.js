@@ -38,9 +38,9 @@ export const goalHeaders = [
     key: 'benchmark'
   },
   {
-    title: 'Implmenter',
+    title: 'Implementer',
     align: 'center',
-    key: 'implmenter'
+    key: 'implementer'
   }
 ]
 

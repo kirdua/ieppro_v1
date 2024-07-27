@@ -40,7 +40,7 @@ const saveGoal = () => {
     currentPerformance: currentPerformance.value,
     duration: duration.value,
     benchmarks: toRaw(benchmarks.value),
-    implmenter: currentImplementer.value
+    implementer: currentImplementer.value
   })
   closeGoalsModal()
 }
