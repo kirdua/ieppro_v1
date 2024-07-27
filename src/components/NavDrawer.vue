@@ -28,7 +28,7 @@ const setActiveItem = (route) => {
       :rail="rail"
       permanent
       @click="rail = false"
-      color="lightblue"
+      color="#385F73"
     >
       <v-list-item :title="userName" nav>
         <template v-slot:append>
@@ -56,7 +56,7 @@ const setActiveItem = (route) => {
 
 <style>
 .selected-item {
-  background-color: #606676;
+  background-color: #385f73;
   color: #eee; /* Replace with your desired color */
 }
 </style>
