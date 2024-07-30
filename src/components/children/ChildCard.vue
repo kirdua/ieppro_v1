@@ -37,7 +37,7 @@ const goToAddServices = (id, grade) => {
 }
 </script>
 <template>
-  <v-card width="596" height="200" elevation="16" color="#385F73" class="d-flex flex-column">
+  <v-card width="496" height="200" elevation="16" color="#385F73" class="d-flex flex-column">
     <v-card-title class="d-flex align-center blue darken-1 text-h5">
       <v-icon color="white-1">mdi-account</v-icon>
       <span class="ml-2">{{ props.child.name }}</span>
@@ -51,8 +51,8 @@ const goToAddServices = (id, grade) => {
       >
     </v-card-title>
     <v-card-subtitle class="d-flex justify-space-between">
-      <strong class="text-h5">Date of Birth: {{ birthDate }}</strong>
-      <strong class="text-h5">Grade Level: {{ props.child.gradeLevel }}</strong>
+      <strong class="text-h6">Date of Birth: {{ birthDate }}</strong>
+      <strong class="text-h6">Grade: {{ props.child.gradeLevel }}</strong>
     </v-card-subtitle>
 
     <v-card-actions class="d-flex justify-end mt-10">

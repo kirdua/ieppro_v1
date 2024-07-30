@@ -49,8 +49,26 @@ watch([selectedChildId, currentGrade], () => {
   updateCurrentChildProfile()
 })
 
-const saveGoals = (data) => {
-  console.log(data)
+watch(
+  () => [selectedChildId.value, currentGrade.value],
+  () => {
+    getGoals()
+  }
+)
+
+const getGoals = async () => {
+  isLoading.value = true
+  const params = {
+    id: selectedChildId.value,
+    gradeLevel: currentGrade.value
+  }
+
+  try {
+    await goalsStore.getGoalsByGradeLevel(params)
+  } catch (error) {
+    console.error(error?.response?.data?.message)
+  }
+  isLoading.value = false
 }
 </script>
 

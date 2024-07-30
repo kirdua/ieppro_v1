@@ -26,7 +26,9 @@ const useGoalsStore = defineStore('goals', () => {
     await setDoc(goalDocRef, goalsData)
   }
 
-  const getGoalsByGradeLevel = () => {}
+  const getGoalsByGradeLevel = ({ id, gradeLevel }) => {
+    console.log(id, gradeLevel)
+  }
   const updateGoalsByGradeLevel = () => {}
   return {
     goals,

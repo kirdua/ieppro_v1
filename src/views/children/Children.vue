@@ -35,7 +35,7 @@ const getChildrenInfo = async () => {
   <div>
     <v-progress-linear v-if="isLoading" color="cyan" indeterminate></v-progress-linear>
 
-    <v-row class="pa-3 d-flex flex-wrap justify-center">
+    <v-row class="pa-3 d-flex flex-wrap space-around">
       <v-col
         v-for="child in childStore.children"
         :key="child._id"
