@@ -14,35 +14,41 @@ export const servicesHeaders = [
 export const goalHeaders = [
   {
     title: 'Goal Focus',
-    align: 'center',
+    align: 'left',
     key: 'goalFocus'
   },
   {
     title: 'Goal Type',
-    align: 'center',
+    align: 'left',
     key: 'goalType'
   },
   {
     title: 'Current Performance',
-    align: 'center',
+    align: 'left',
     key: 'currentPerformance'
   },
   {
     title: 'Duration',
-    align: 'center',
+    align: 'left',
     key: 'duration'
   },
   {
-    title: 'Benchmark',
+    title: 'Benchmarks',
     align: 'center',
     key: 'benchmark'
   },
   {
     title: 'Implementer',
-    align: 'center',
+    align: 'left',
     key: 'implementer'
   }
 ]
+
+export const formatTableData = (value, type) => {
+  if (type === 'falsey') return !value ? '--' : 'Yes'
+  if (type === 'time') return !value ? '' : `${value} mins`
+  if (type === 'number') return !value ? '' : `${value.length} benchmarks`
+}
 
 export const semesterOptions = ['Full IEP Year', 'Fall', 'Spring', 'Summer']
 

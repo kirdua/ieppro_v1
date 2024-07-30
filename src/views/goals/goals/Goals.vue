@@ -93,6 +93,6 @@ const getGoals = async () => {
       ></v-select>
     </div>
     <!-- <GoalsSidebar />-->
-    <GoalsTable :items="test" />
+    <GoalsTable :items="goalsStore.goals" />
   </div>
 </template>

@@ -7,7 +7,7 @@ import moment from 'moment'
 const useGoalsStore = defineStore('goals', () => {
   const formatDate = moment().format()
 
-  const goals = ref()
+  const goals = ref([])
   const modalIsVisible = ref(false)
   const currentChildProfile = ref({})
 
@@ -26,9 +26,32 @@ const useGoalsStore = defineStore('goals', () => {
     await setDoc(goalDocRef, goalsData)
   }
 
-  const getGoalsByGradeLevel = ({ id, gradeLevel }) => {
-    console.log(id, gradeLevel)
+  const getGoalsByGradeLevel = async ({ id, gradeLevel }) => {
+    try {
+      console.log('Fetching goals for id:', id, 'and grade:', gradeLevel)
+
+      const q = query(goalsCollection, where('id', '==', id), where('grade', '==', gradeLevel))
+      const querySnapshot = await getDocs(q)
+
+      if (querySnapshot.empty) {
+        console.log('No matching documents.')
+      }
+
+      const goalsList = []
+      querySnapshot.forEach((doc) => {
+        const data = doc.data()
+        if (data.goals) {
+          goalsList.push(...data.goals) // Extracting and adding the goals array to goalsList
+        }
+      })
+
+      console.log('Retrieved goals:', goalsList)
+      goals.value = goalsList
+    } catch (error) {
+      console.error('Error fetching goals:', error)
+    }
   }
+
   const updateGoalsByGradeLevel = () => {}
   return {
     goals,

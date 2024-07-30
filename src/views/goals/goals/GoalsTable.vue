@@ -1,5 +1,5 @@
 <script setup>
-import { goalHeaders } from '@/constants'
+import { goalHeaders, formatTableData } from '@/constants'
 
 const props = defineProps(['items', 'isLoading'])
 </script>
@@ -10,16 +10,12 @@ const props = defineProps(['items', 'isLoading'])
     </template>
     <template v-slot:item="{ item }">
       <tr>
-        <td>{{ item.semester }}</td>
-        <td>{{ item.year }}</td>
-        <td>{{ item.course }}</td>
-        <td>{{ item.location }}</td>
-        <td class="text-center">{{ formatTableData(item.genEdModified, 'falsey') }}</td>
-        <td class="text-center">{{ formatTableData(item.genEducationTime, 'time') }}</td>
-        <td class="text-center">{{ formatTableData(item.specialEducationTime, 'time') }}</td>
-        <td>{{ item.gradedBy }}</td>
-        <td class="text-center">{{ item.startDate }}</td>
-        <td class="text-center">{{ item.endDate }}</td>
+        <td>{{ item.goalFocus }}</td>
+        <td>{{ item.goalType }}</td>
+        <td>{{ item.currentPerformance }}</td>
+        <td>{{ item.duration }}</td>
+        <td class="text-center">{{ formatTableData(item.benchmarks, 'number') }}</td>
+        <td>{{ item.implementer }}</td>
       </tr>
     </template>
     <template #bottom></template>
