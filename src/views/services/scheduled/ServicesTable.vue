@@ -1,12 +1,7 @@
 <script setup>
-import { servicesHeaders } from '@/constants'
+import { servicesHeaders, formatTableData } from '@/constants'
 
 const props = defineProps(['items', 'isLoading'])
-
-const formatTableData = (value, type) => {
-  if (type === 'falsey') return !value ? '--' : 'Yes'
-  if (type === 'time') return !value ? '' : `${value} mins`
-}
 </script>
 <template>
   <v-data-table :headers="servicesHeaders" :items="props.items" :loading="isLoading">

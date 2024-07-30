@@ -34,7 +34,7 @@ export const goalHeaders = [
   },
   {
     title: 'Benchmarks',
-    align: 'center',
+    align: 'left',
     key: 'benchmark'
   },
   {

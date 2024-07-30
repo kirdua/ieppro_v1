@@ -9,12 +9,12 @@ const props = defineProps(['items', 'isLoading'])
       <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
     </template>
     <template v-slot:item="{ item }">
-      <tr>
+      <tr class="hoverable-row">
         <td>{{ item.goalFocus }}</td>
         <td>{{ item.goalType }}</td>
         <td>{{ item.currentPerformance }}</td>
         <td>{{ item.duration }}</td>
-        <td class="text-center">{{ formatTableData(item.benchmarks, 'number') }}</td>
+        <td>{{ formatTableData(item.benchmarks, 'number') }}</td>
         <td>{{ item.implementer }}</td>
       </tr>
     </template>

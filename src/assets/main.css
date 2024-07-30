@@ -1,0 +1,4 @@
+.hoverable-row:hover {
+  background-color: #f0f0f0;
+  cursor: pointer; /* Change this to the color you want */
+}
