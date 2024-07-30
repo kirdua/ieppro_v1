@@ -229,5 +229,3 @@ const formatEndDate = (date) => {
     </div>
   </div>
 </template>
-
-<style></style>

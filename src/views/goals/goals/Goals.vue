@@ -7,7 +7,6 @@ import useGoalsStore from '@/stores/goals'
 
 import GoalsTable from './GoalsTable.vue'
 import GoalsSidebar from '../goals/GoalsSidebar.vue'
-import AddGoals from '../add/AddGoalsDialog.vue'
 
 const userStore = useUserStore()
 const childStore = useChildrenStore()
@@ -18,7 +17,6 @@ const { uid } = userStore.userInfo
 const currentGrade = ref('')
 const selectedChildId = ref(null)
 const childOptions = ref([])
-const currentSelectedChild = ref({})
 const isLoading = ref(false)
 
 onMounted(async () => {
@@ -94,10 +92,7 @@ const getGoals = async () => {
         :disabled="isLoading"
       ></v-select>
     </div>
-  </div>
-  <div>
     <!-- <GoalsSidebar />-->
     <GoalsTable :items="test" />
-    <add-goals @save-goals="saveGoals" :currentSelectedChild="currentSelectedChild" />
   </div>
 </template>
