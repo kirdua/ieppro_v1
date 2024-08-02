@@ -53,7 +53,7 @@ const handleAddGoals = () => {
 }
 </script>
 <template>
-  <v-app-bar flat class="justify-end">
+  <v-app-bar flat class="justify-end dropshadow">
     <template v-slot:prepend>
       <h3>{{ currentTitle }}</h3>
     </template>

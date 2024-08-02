@@ -11,7 +11,7 @@ const drawer = ref(true)
 const rail = ref(true)
 
 const userName = computed(() => {
-  return userInfo.name.split(' ')[0]
+  return !userInfo.name ? 'User' : userInfo.name.split(' ')[0]
 })
 
 const activeItem = ref('') // Store the active item route
@@ -27,8 +27,8 @@ const setActiveItem = (route) => {
       v-model="drawer"
       :rail="rail"
       permanent
-      @click="rail = false"
       color="#385F73"
+      @click="rail = false"
     >
       <v-list-item :title="userName" nav>
         <template v-slot:append>

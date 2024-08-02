@@ -10,9 +10,15 @@ const useGoalsStore = defineStore('goals', () => {
   const goals = ref([])
   const modalIsVisible = ref(false)
   const currentChildProfile = ref({})
+  const showGoalsSidebar = ref(false)
+  const selectedGoalRow = ref({})
 
   const toggleModal = () => {
     modalIsVisible.value = !modalIsVisible.value
+  }
+
+  const toggleGoalsDrawer = (showHide) => {
+    showGoalsSidebar.value = showHide
   }
 
   const addGoalsToGradeLevel = async (data) => {
@@ -28,8 +34,6 @@ const useGoalsStore = defineStore('goals', () => {
 
   const getGoalsByGradeLevel = async ({ id, gradeLevel }) => {
     try {
-      console.log('Fetching goals for id:', id, 'and grade:', gradeLevel)
-
       const q = query(goalsCollection, where('id', '==', id), where('grade', '==', gradeLevel))
       const querySnapshot = await getDocs(q)
 
@@ -44,8 +48,6 @@ const useGoalsStore = defineStore('goals', () => {
           goalsList.push(...data.goals) // Extracting and adding the goals array to goalsList
         }
       })
-
-      console.log('Retrieved goals:', goalsList)
       goals.value = goalsList
     } catch (error) {
       console.error('Error fetching goals:', error)
@@ -56,11 +58,14 @@ const useGoalsStore = defineStore('goals', () => {
   return {
     goals,
     modalIsVisible,
+    showGoalsSidebar,
+    currentChildProfile,
+    selectedGoalRow,
     toggleModal,
     addGoalsToGradeLevel,
     getGoalsByGradeLevel,
     updateGoalsByGradeLevel,
-    currentChildProfile
+    toggleGoalsDrawer
   }
 })
 
