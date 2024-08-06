@@ -33,6 +33,7 @@ export const diagnosesList = [
 ]
 
 export const accommodationsList = [
+  'No Accommodations',
   'Augmentative and Alternative Communication (AAC Device)',
   'Flexible seating arrangements (e.g., stability balls, standing desks)',
   'Extended time for assignments or tests',

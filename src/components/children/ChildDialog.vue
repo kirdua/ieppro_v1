@@ -55,19 +55,21 @@ const clearForm = () => {
   dateOfBirth.value = ''
   gradeLevel.value = ''
   diagnoses.value = null
-  accommodations.value = null
+  accommodations.value = accommodationsList[0]
   extendeSchoolYear.value = true
   specialTransportation.value = false
 }
 
 const submitChild = async () => {
+  const accommodationsValue = accommodations.value || accommodationsList[0]
+
   const childInfo = {
     parentId: props.parentId,
     name: name.value,
     dateOfBirth: dateOfBirth.value,
     gradeLevel: gradeLevel.value,
     diagnoses: diagnoses.value,
-    accommodations: accommodations.value,
+    accommodations: accommodationsValue,
     extendeSchoolYear: extendeSchoolYear.value,
     specialTransportation: specialTransportation.value,
     _id: _id.value || myuuid
@@ -76,6 +78,8 @@ const submitChild = async () => {
   if (!childInfo.name || !childInfo.dateOfBirth || !childInfo.gradeLevel || !childInfo.diagnoses) {
     return toast.error('Add child information')
   }
+
+  console.log('Submitting child info:', childInfo)
 
   try {
     if (childrenStore.editProfile) {
