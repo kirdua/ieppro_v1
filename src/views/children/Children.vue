@@ -14,12 +14,12 @@ const { userInfo } = userStore
 const isLoading = ref(false)
 
 onMounted(() => {
-  isLoading.value = true
   if (!userInfo.uid) return
   getChildrenInfo()
 })
 
 const getChildrenInfo = async () => {
+  isLoading.value = true
   try {
     await childStore.getChildrenProfiles(userInfo.uid)
 
@@ -29,6 +29,7 @@ const getChildrenInfo = async () => {
   } catch (error) {
     console.error(error)
   }
+  isLoading.value = false
 }
 </script>
 <template>
