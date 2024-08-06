@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import useUserStore from '@/stores/user'
 import AppBar from '@/components/AppBar.vue'
@@ -10,9 +10,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 
 const userStore = useUserStore()
 
-const isLoggedIn = computed(() => {
-  return userStore.userLoggedIn
-})
+const isLoggedIn = computed(() => userStore.userLoggedIn)
 </script>
 
 <template>
