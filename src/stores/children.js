@@ -77,7 +77,6 @@ const useChildrenStore = defineStore('children', () => {
 
   const deleteChildProfile = async ({ _id, parentId }) => {
     try {
-      // Query the collection to find the document with the matching _id and parentId
       const q = query(
         childrenCollection,
         where('_id', '==', _id),
@@ -87,14 +86,9 @@ const useChildrenStore = defineStore('children', () => {
 
       // Check if any documents match the query
       if (!querySnapshot.empty) {
-        // Loop through the documents and delete them
         querySnapshot.forEach(async (docSnapshot) => {
-          // Get the document reference
           const childDocRef = doc(childrenCollection, docSnapshot.id)
-
-          // Delete the document
           await deleteDoc(childDocRef)
-          console.log(`Child profile with ID ${docSnapshot.id} deleted successfully.`)
         })
 
         // Refresh the profiles
